@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.AI;
+using UnityEngine.UIElements;
 
 public class ObjectPool : MonoBehaviour
 {
@@ -8,6 +10,7 @@ public class ObjectPool : MonoBehaviour
     {
         for (int i = 0; i < objectCount; i++)
         {
+            Debug.Log("(Awake) Now at " + i);
             var instance = Instantiate(prefab, transform);
             instance.SetActive(false);
         }
@@ -15,13 +18,15 @@ public class ObjectPool : MonoBehaviour
 
     public GameObject GetInactiveChild()
     {
-        for (int i = 0; i < transform.childCount; i++)
+        //for (int i = 0; i < transform.childCount; i++)
+        for (int i = 0; i < objectCount; i++)
         {
             var child = transform.GetChild(i).gameObject;
             if (!child.activeSelf)
             {
                 child.transform.parent = null;
                 child.SetActive(true);
+                Debug.Log("Child at " + child.transform.position.ToString());
                 return child;
             }
         }

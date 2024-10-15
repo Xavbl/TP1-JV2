@@ -1,4 +1,7 @@
+using NUnit.Framework;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.UI;
 
 public class AlienSpawnManager : MonoBehaviour
@@ -6,14 +9,14 @@ public class AlienSpawnManager : MonoBehaviour
     [Header("Spawning")]
     [SerializeField] private GameObject alienPrefab;
     [SerializeField, Min(1)] private int maxNbEnemies = 20;
-    [SerializeField, Tooltip("In Seconds."), Min(1)] private float delay = 5f;
+    [SerializeField, Tooltip("In Seconds."), Min(1)] private float delay = 1f;
 
     [Header("Spawnpoints")]
     [SerializeField] private Transform[] portals;
 
     private Awaitable routine;
     private ObjectPool alienObjectPool;
-    private int nbEnemies;
+    private int nbEnemies = 0;
 
     private void Awake()
     {
@@ -33,13 +36,9 @@ public class AlienSpawnManager : MonoBehaviour
     private async Awaitable SpawningRoutine()
     {
         while (isActiveAndEnabled && nbEnemies <= maxNbEnemies)
-        {
-            // Code pour la position des portaux obtenu grâce à ce lien
-            // https://stackoverflow.com/questions/75304310/creating-multiple-spawnpoints-in-unity-multiplayer
-
-            Debug.Log(nbEnemies);
-
-            var position = getPortal().position;
+        {  
+            Debug.Log("Number of enemies : " + nbEnemies + ", Max is : " + maxNbEnemies);
+            var position = GetPortal().position;
             GameObject alien = alienObjectPool.GetInactiveChild();
             alien.transform.position = position;
             alien.transform.rotation = Quaternion.identity;
@@ -50,7 +49,7 @@ public class AlienSpawnManager : MonoBehaviour
         }
     }
 
-    private Transform getPortal()
+    private Transform GetPortal()
     {
         while (true)
         {

@@ -17,7 +17,7 @@ public class Portal : MonoBehaviour
         //{
         //    return;
         //}
-        currentHealthPoints--;
+        //currentHealthPoints--;
     }
 
     private void Update()
@@ -25,6 +25,7 @@ public class Portal : MonoBehaviour
         if (currentHealthPoints <= 0)
         {
             enabled = false;
+            this.GetComponent<Renderer>().enabled = false;
         }
     }
 }
