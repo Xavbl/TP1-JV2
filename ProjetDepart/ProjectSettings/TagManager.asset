@@ -8,6 +8,9 @@ TagManager:
   - Missile
   - Health
   - World
+  - Enemy
+  - Spawner
+  - SpawnManager
   layers:
   - Default
   - TransparentFX

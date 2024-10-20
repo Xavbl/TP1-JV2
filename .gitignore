@@ -76,3 +76,5 @@ crashlytics-build.properties
 
 #DLL needs to be commited, because this is a Unity Project
 !*.dll
+
+*.vsconfig
