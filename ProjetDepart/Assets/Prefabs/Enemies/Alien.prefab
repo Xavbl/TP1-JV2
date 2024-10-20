@@ -188,6 +188,8 @@ GameObject:
   - component: {fileID: 4361385656479981840}
   - component: {fileID: 4098877264713666372}
   - component: {fileID: 8879353799039253743}
+  - component: {fileID: 2778623655649233449}
+  - component: {fileID: 861115986944948534}
   m_Layer: 0
   m_Name: Alien
   m_TagString: Enemy
@@ -251,7 +253,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6e5eda0e82183048b60e17b368a8b14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 100
+  deathSFX: {fileID: 8300000, guid: 8f252cb39a2a2da44aefd3d09599af53, type: 3}
 --- !u!143 &4361385656479981840
 CharacterController:
   m_ObjectHideFlags: 0
@@ -322,6 +324,70 @@ NavMeshAgent:
   m_BaseOffset: 1.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!95 &2778623655649233449
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 616056485553046870}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: fb900ac847b684cda925ff9b43688031, type: 3}
+  m_Controller: {fileID: 9100000, guid: 3a8f5e4e92cfdd146b2c19ccde20818f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 1
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &861115986944948534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 616056485553046870}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9477ccb079544b04b9a9f9f9b78a4a4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerIndex: 0
+  idleAnimation: 0
+  eyeState: 0
+  bodyRenderers:
+  - {fileID: 616056487105725486}
+  - {fileID: 871144440330977506}
+  - {fileID: 616056485850343096}
+  - {fileID: 616056487270942842}
+  - {fileID: 616056486644496720}
+  - {fileID: 5098723525357477770}
+  - {fileID: 9152979490389760842}
+  - {fileID: 616056485494741373}
+  - {fileID: 616056486283301719}
+  - {fileID: 616056486283516892}
+  - {fileID: 616056486767276380}
+  - {fileID: 616056486660803789}
+  - {fileID: 616056485369056264}
+  eyesRenderer: {fileID: 5098723525357477770}
+  bodyTextures:
+  - {fileID: 2800000, guid: b9bf0b737e674433d8948f8f855969fa, type: 3}
+  eyeColors:
+  - {r: 0, g: 0, b: 0, a: 0}
+  eyesTextureOffset:
+  - {x: 0, y: 0}
+  - {x: 0.33, y: 0}
+  - {x: 0.66, y: 0}
+  - {x: 0.33, y: 0.66}
+  walkThreshold: 0.1
+  walkStartDamping: 0.3
+  walkStopDamping: 0.15
 --- !u!1 &616056485579276216
 GameObject:
   m_ObjectHideFlags: 0

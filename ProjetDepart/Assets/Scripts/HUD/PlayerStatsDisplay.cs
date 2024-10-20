@@ -4,10 +4,6 @@ using UnityEngine.UI;
 
 public class PlayerStatsDisplay : MonoBehaviour
 {
-    //[Header("Image display")]
-    //[SerializeField] private Texture2D heartHUDTexture;
-    //[SerializeField] private Texture2D missilesHUDTexture;
-
     [Header("Text display")]
     [SerializeField] private TextMeshProUGUI healthPointsDisplay;
     [SerializeField] private TextMeshProUGUI missilesDisplay;
@@ -15,20 +11,21 @@ public class PlayerStatsDisplay : MonoBehaviour
     private int healthPoints;
     private int nbMissiles;
 
-    // Pour afficher HP et missiles en temps réel
-    // Utiliser notifier / canal / finders pour
-    // envoyer "ping" et changer les stats.
-
-
     private void Awake()
     {
         healthPointsDisplay = GameObject.Find("HealthText").GetComponent<TextMeshProUGUI>();
         missilesDisplay = GameObject.Find("MissilesText").GetComponent<TextMeshProUGUI>();
+        EventChannels.OnPlayerHealthChange += UpdateHealth;
+        EventChannels.OnNumberMissileChange += UpdateMissilesCount;
     }
 
-    void Update()
+    void UpdateHealth(int health)
     {
         healthPointsDisplay.text = healthPoints.ToString();
+    }
+
+    void UpdateMissilesCount(int nbMissiles)
+    {
         missilesDisplay.text = nbMissiles.ToString();
     }
 }

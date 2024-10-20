@@ -8,12 +8,11 @@ public class AlienSpawnManager : MonoBehaviour
 {
     [Header("Spawning")]
     [SerializeField] private GameObject alienPrefab;
-    [SerializeField, Min(1)] private int maxNbEnemies = 20;
+    [SerializeField, Min(1)] public static int maxNbEnemies = 20;
     [SerializeField, Tooltip("In Seconds."), Min(1)] private float delay = 1f;
 
     [Header("Spawnpoints")]
-    [SerializeField] private Transform[] portals;
-
+    [SerializeField] public Transform[] portals;
     private Awaitable routine;
     private ObjectPool alienObjectPool;
     private int nbEnemies = 0;

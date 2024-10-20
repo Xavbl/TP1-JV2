@@ -1752,13 +1752,17 @@ GameObject:
   - component: {fileID: 9108294063060053545}
   - component: {fileID: 9119773746958452861}
   - component: {fileID: 9139708504117768331}
+  - component: {fileID: 1094856618396601927}
+  - component: {fileID: 6262321443294324683}
+  - component: {fileID: 7775917971206643040}
+  - component: {fileID: 3299747198224205929}
   m_Layer: 0
   m_Name: Robot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &9108294063060053545
 Transform:
   m_ObjectHideFlags: 0
@@ -1824,6 +1828,111 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1094856618396601927
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9109252959854335185}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79714d89a6f40704c87e08b0624c493e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealthPoints: 100
+  positions:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  deathSFX: {fileID: 8300000, guid: a26066d5630ecdc469de5a4ce3dd39d9, type: 3}
+  delayBeforeMoving: 5
+  delayBeforeShooting: 8
+--- !u!114 &6262321443294324683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9109252959854335185}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d711c00bde4dc5c48b043c292892b70a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 2525046337550401708, guid: 19f798a9e34714c4bb756437b364b449, type: 3}
+  objectCount: 3
+--- !u!114 &7775917971206643040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9109252959854335185}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f038a19db030704f8b44cf4f6a04ad9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerIndex: 0
+  idleAnimation: 0
+  eyeState: 0
+  bodyRenderers:
+  - {fileID: 9095207116825894433}
+  - {fileID: 9095207118672112867}
+  - {fileID: 9095207119084379105}
+  - {fileID: 9095207120201011097}
+  - {fileID: 9095207116384195757}
+  - {fileID: 9095207116889148429}
+  - {fileID: 9095207119386793317}
+  - {fileID: 9095207118714565769}
+  - {fileID: 9095207117606189499}
+  - {fileID: 9095207118237770327}
+  - {fileID: 9095207117617383383}
+  - {fileID: 9095207117459441649}
+  - {fileID: 9095207119109967213}
+  - {fileID: 9095207120308870363}
+  - {fileID: 9095207118548448359}
+  eyesRenderer: {fileID: 0}
+  bodyTextures:
+  - {fileID: 2800000, guid: 99e09a9bd0f10384fa2a3bcbd5c65c9d, type: 3}
+  eyeColors:
+  - {r: 0, g: 0, b: 0, a: 0}
+  eyesTextureOffset:
+  - {x: 0, y: 0}
+  - {x: 0.33, y: 0}
+  - {x: 0.66, y: 0}
+  - {x: 0.33, y: 0.66}
+  walkThreshold: 0.1
+  walkStartDamping: 0.3
+  walkStopDamping: 0.15
+--- !u!95 &3299747198224205929
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9109252959854335185}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: fb900ac847b684cda925ff9b43688031, type: 3}
+  m_Controller: {fileID: 9100000, guid: fc7d62e7f046567439806d0f6393455e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 1
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 1
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &9109252959937567095
 GameObject:
   m_ObjectHideFlags: 0
