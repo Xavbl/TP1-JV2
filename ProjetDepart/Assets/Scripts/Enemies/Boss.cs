@@ -48,7 +48,7 @@ public class Boss : MonoBehaviour
         while (isActiveAndEnabled)
         {
             var position = this.transform.position;
-            GameObject missile = missileObjectPool.GetInactiveChild();
+            GameObject missile = missileObjectPool.Get();
             missile.transform.position = position;
             missile.transform.LookAt(player.transform);
             missile.SetActive(true);
@@ -87,7 +87,7 @@ public class Boss : MonoBehaviour
                 enabled = false;
                 EventChannels.OnBossDeath();
             }
-            currentHealthPoints -= bullet.damage;
+            //currentHealthPoints -= bullet.damage;
         }
         return;
     }

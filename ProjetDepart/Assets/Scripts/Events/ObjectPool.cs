@@ -16,7 +16,7 @@ public class ObjectPool : MonoBehaviour
         }
     }
 
-    public GameObject GetInactiveChild()
+    public GameObject Get()
     {
         for (int i = 0; i < objectCount; i++)
         {

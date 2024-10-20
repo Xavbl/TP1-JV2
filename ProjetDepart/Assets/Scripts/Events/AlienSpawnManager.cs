@@ -38,7 +38,7 @@ public class AlienSpawnManager : MonoBehaviour
         {  
             Debug.Log("Number of enemies : " + nbEnemies + ", Max is : " + maxNbEnemies);
             var position = GetPortal().position;
-            GameObject alien = alienObjectPool.GetInactiveChild();
+            GameObject alien = alienObjectPool.Get();
             alien.transform.position = position;
             alien.transform.rotation = Quaternion.identity;
             alien.SetActive(true);
