@@ -18,7 +18,6 @@ public class Player : MonoBehaviour
     [SerializeField] float fireRateBoostDuration = 10f;
 
     float verticalVelocity = 0f;
-    bool isJumping = false;
 
 
     [SerializeField] InputActionReference moveActionReference;
@@ -33,7 +32,7 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         playerController = GetComponent<CharacterController>();
-        gameManager = FindAnyObjectByType<GameManager>();
+        gameManager = Finder.GameManager;
     }
 
     void Update()
@@ -75,7 +74,6 @@ public class Player : MonoBehaviour
             if (jumpActionRefernce.action.triggered)
             {
                 verticalVelocity = jumpSpeed;
-                isJumping = true;
             }
             else
             {
