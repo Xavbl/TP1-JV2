@@ -1,16 +1,23 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
+    [SerializeField] int lifePoints = 100;
+    [SerializeField] float fireDelay = 1.0f;
+    bool canShoot = true;
+
     [SerializeField] int speed;
-    [SerializeField] float rotationSpeed = 10;
-    [SerializeField] int jumpSpeed = 10;
-    [SerializeField] float jumpMaxDuration = 10;
-    [SerializeField] float gravityMultiplier = 1;
-    float jumpTimer;
-    bool isJumping = false;
+    [SerializeField] float rotationSpeed = 20;
+
+    [SerializeField] float jumpSpeed = 50.5f;
+    [SerializeField] float gravityMultiplier = 5;
+
+    [SerializeField] float fireRateBoostDuration = 10f;
+
+    float verticalVelocity = 0f;
 
 
     [SerializeField] InputActionReference moveActionReference;
@@ -20,15 +27,14 @@ public class Player : MonoBehaviour
     [SerializeField] GameObject cannon;
 
     CharacterController playerController;
-    private ObjectPool bulletObjectPool;
+    GameManager gameManager;
 
     private void Awake()
     {
-        bulletObjectPool = Finder.BulletObjectPool;
         playerController = GetComponent<CharacterController>();
+        gameManager = Finder.GameManager;
     }
 
-    // Update is called once per frame
     void Update()
     {
         Vector3 playerMovement = CalculateMovement() + Jump();
@@ -38,15 +44,17 @@ public class Player : MonoBehaviour
         float horizontalRotation = mouseDelta.x * rotationSpeed * Time.deltaTime;
         transform.Rotate(0, horizontalRotation, 0);
 
-        if (shootActionReference.action.triggered)
+        if (shootActionReference.action.triggered && canShoot)
         {
-            GameObject bullet = bulletObjectPool.Get();
-            if (bullet != null)
-            {
-                bullet.transform.position = cannon.transform.position;
-                bullet.transform.rotation = transform.rotation;
-            }
+            StartCoroutine(Fire());
         }
+    }
+    IEnumerator Fire()
+    {
+        canShoot = false;
+        StartCoroutine(gameManager.HandleBullet(cannon.transform.position, gameObject.transform.rotation) );
+        yield return new WaitForSeconds(fireDelay);
+        canShoot = true;
     }
     Vector3 CalculateMovement()
     {
@@ -61,24 +69,57 @@ public class Player : MonoBehaviour
     }
     Vector3 Jump()
     {
-        if(playerController.isGrounded && jumpActionRefernce.action.triggered)
+        if (playerController.isGrounded)
         {
-            isJumping = true;
-            jumpTimer = jumpMaxDuration;
+            if (jumpActionRefernce.action.triggered)
+            {
+                verticalVelocity = jumpSpeed;
+            }
+            else
+            {
+                verticalVelocity = 0f;
+            }
         }
-        Debug.Log(isJumping);
-        if (jumpActionRefernce.action.WasCompletedThisFrame() || jumpTimer <= 0)
+        else
         {
-            isJumping = false;
+            verticalVelocity -= gravityMultiplier * Time.deltaTime;
         }
+        return transform.up * verticalVelocity;
+    }
 
-        Vector3 jumpVector = Vector3.zero;
-        if (isJumping)
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Health"))
         {
-            jumpVector = transform.up * jumpSpeed *Time.deltaTime;
-            jumpTimer -= Time.deltaTime;    
+            gameManager.AddHealth();
+            other.gameObject.SetActive(false);
         }
-        return jumpVector;
+        else if (other.CompareTag("Ammo"))
+        {
+            StartCoroutine(FireRateBoost());
+            other.gameObject.SetActive(false);
+        }
+        else if (other.CompareTag("Missile"))
+        {
+            gameManager.AddMissiles();
+            other.gameObject.SetActive(false);
+        }
+    }
+
+    void GainLife(int amount)
+    {
+        lifePoints += amount;
+        Debug.Log("Life Points: " + lifePoints);
+    }
+
+    IEnumerator FireRateBoost()
+    {
+            float originalFireDelay = fireDelay;
+            fireDelay /= 2;
+
+            yield return new WaitForSeconds(fireRateBoostDuration);
+
+            fireDelay = originalFireDelay;
     }
 
 }

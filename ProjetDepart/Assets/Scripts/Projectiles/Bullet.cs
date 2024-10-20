@@ -1,6 +1,7 @@
+using System.Collections;
 using UnityEngine;
 
-public class ProjectileBehavior : MonoBehaviour
+public class Bullet : MonoBehaviour
 {
     [SerializeField] float bulletSpeed = 10;
     Rigidbody bulletBody;
@@ -8,9 +9,14 @@ public class ProjectileBehavior : MonoBehaviour
     {
         bulletBody = GetComponentInChildren<Rigidbody>();
     }
+
+    private void OnEnable()
+    {
+        bulletBody.linearVelocity = Vector3.zero;
+    }
+
     void Update()
     {
         bulletBody.linearVelocity = (bulletSpeed * Time.deltaTime * transform.forward);
-
     }
 }

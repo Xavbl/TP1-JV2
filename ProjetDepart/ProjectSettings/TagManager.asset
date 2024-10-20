@@ -4,6 +4,10 @@
 TagManager:
   serializedVersion: 3
   tags:
+  - Ammo
+  - Missile
+  - Health
+  - World
   - Enemy
   - Spawner
   - SpawnManager
