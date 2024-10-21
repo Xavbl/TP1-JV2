@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Events;
+using static UnityEngine.Rendering.GPUSort;
 
 public class Portal : MonoBehaviour
 {
@@ -23,6 +24,7 @@ public class Portal : MonoBehaviour
                 enabled = false;
                 this.GetComponent<Renderer>().enabled = false;
                 EventChannels.OnPortalDeath.Invoke(this);
+                Finder.Tracker.nbPortalsDead++;
             }
             EventChannels.OnPortalHealthChange.Invoke(this, currentHealthPoints);
         }

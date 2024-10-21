@@ -59,4 +59,9 @@ public class AlienSpawnManager : MonoBehaviour
             }
         }
     }
+
+    public int GetLength()
+    {
+        return portals.Length;
+    }
 }

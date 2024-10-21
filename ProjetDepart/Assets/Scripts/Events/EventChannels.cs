@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics.Tracing;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -22,4 +23,9 @@ public class EventChannels : MonoBehaviour
 
     // HUD
     public static UnityAction OnWin;
+
+    public void PublishPlayerDeath()
+    {
+        OnPlayerDeath.Invoke();
+    }
 }

@@ -4,11 +4,12 @@ using UnityEngine.Events;
 
 public class WinTracker : MonoBehaviour
 {
-    private int nbAliensDead = 0;
-    private int nbPortalsDead = 0;
+    public int nbAliensDead = 0;
+    public int nbPortalsDead = 0;
+    public bool winCondition;
     private int requiredAliensDead = AlienSpawnManager.maxNbEnemies;
     private int requiredPortalsDead = 8;
-    public static bool winCondition;
+    //public static bool winCondition;
 
     private void Awake()
     {
@@ -17,14 +18,20 @@ public class WinTracker : MonoBehaviour
         EventChannels.OnWin += WinScreen;
     }
 
-    private void UpdateDeadPortalCount(Portal portal)
+    public void UpdateDeadPortalCount(Portal portal)
     {
         nbPortalsDead++;
     }
 
-    private void UpdateDeadAlienCount(Alien alien)
+    public void UpdateDeadAlienCount(Alien alien)
     {
         nbAliensDead++;
+    }
+
+    private void Update()
+    {
+        nbAliensDead++;
+        nbPortalsDead++;
     }
 
     private void WinScreen()

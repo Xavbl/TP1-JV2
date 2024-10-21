@@ -18,6 +18,7 @@ public static class Finder
     private static Boss boss;
     private static EventChannels eventChannels;
     private static ObjectPool objectPool;
+    private static WinTracker tracker;
 
     public static ObjectPool BulletObjectPool
     {
@@ -158,6 +159,18 @@ public static class Finder
                 boss = GameObject.FindWithTag("Boss")?.GetComponent<Boss>();
             }
             return boss;
+        }
+    }
+
+    public static WinTracker Tracker
+    {
+        get
+        {
+            if (tracker == null)
+            {
+                tracker = GameObject.Find("GameTracker")?.GetComponent<WinTracker>();
+            }
+            return tracker;
         }
     }
 }

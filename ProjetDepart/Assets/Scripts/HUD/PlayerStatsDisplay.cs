@@ -38,12 +38,18 @@ public class PlayerStatsDisplay : MonoBehaviour
 
     void ShowVictoryScreen()
     {
-        winMessageDisplay.enabled = true;
-        Time.timeScale = 0;
+        if (Finder.Tracker.winCondition)
+        {
+            winMessageDisplay.enabled = true;
+            Time.timeScale = 0;
+        }
     }
 
     void ShowGameOverScreen()
     {
-        loseMessageDisplay.enabled = true;
+        //if(Finder.Player.health <= 0)
+        //{
+        //    loseMessageDisplay.enabled = true;
+        //}
     }
 }

@@ -32,6 +32,7 @@ public class Alien : MonoBehaviour
         EventChannels.OnAlienDeath(this);
         audioSource.PlayOneShot(deathSFX);
         objectPool.Release(this.gameObject);
+        Finder.Tracker.nbAliensDead++;
     }
 
     public void OnEnable()
