@@ -20,4 +20,6 @@ public class EventChannels : MonoBehaviour
     public static UnityAction<Boss, int> OnBossHealthChange;
     public static UnityAction OnBossDeath;
 
+    // HUD
+    public static UnityAction OnWin;
 }

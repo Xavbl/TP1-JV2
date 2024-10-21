@@ -1,17 +1,20 @@
 using System;
 using UnityEngine;
+using UnityEngine.Events;
 
-public class BossTracker : MonoBehaviour
+public class WinTracker : MonoBehaviour
 {
     private int nbAliensDead = 0;
     private int nbPortalsDead = 0;
     private int requiredAliensDead = AlienSpawnManager.maxNbEnemies;
     private int requiredPortalsDead = 8;
+    public static bool winCondition;
 
     private void Awake()
     {
         EventChannels.OnAlienDeath += UpdateDeadAlienCount;
         EventChannels.OnPortalDeath += UpdateDeadPortalCount;
+        EventChannels.OnWin += WinScreen;
     }
 
     private void UpdateDeadPortalCount(Portal portal)
@@ -24,11 +27,12 @@ public class BossTracker : MonoBehaviour
         nbAliensDead++;
     }
 
-    private void SpawnBoss()
+    private void WinScreen()
     {
         if(nbPortalsDead >= requiredPortalsDead && nbAliensDead >= requiredAliensDead)
         {
-            Finder.EventChannels.Invoke("PublishBossSpawn", 5f);
+            winCondition = true;
         }
+        winCondition = false;
     }
 }

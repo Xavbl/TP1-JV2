@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -23,18 +24,19 @@ public class Alien : MonoBehaviour
         agent.enabled = false;
         objectPool = Finder.ObjectPool;
         audioSource = GetComponent<AudioSource>();
+        EventChannels.OnAlienDeath += OnAlienDeath;
+    }
+
+    private void OnAlienDeath(Alien arg0)
+    {
+        EventChannels.OnAlienDeath(this);
+        audioSource.PlayOneShot(deathSFX);
+        objectPool.Release(this.gameObject);
     }
 
     public void OnEnable()
     {
         agent.enabled = true;
-    }
-
-    private void OnAlienDeath()
-    {
-        EventChannels.OnAlienDeath(this);
-        audioSource.PlayOneShot(deathSFX);
-        objectPool.Release(this.gameObject);
     }
 
     void FixedUpdate()
@@ -47,7 +49,7 @@ public class Alien : MonoBehaviour
         if (other.gameObject.GetComponent<Bullet>() is not null)
         {
             enabled = false;
-            OnAlienDeath();
+            OnAlienDeath(this);
         }
         return;
     }

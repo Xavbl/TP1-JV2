@@ -11,8 +11,6 @@ public class BossAnimations : MonoBehaviour
 
     [Header("State")]
     [SerializeField] private PlayerIndexValue playerIndex;
-    [SerializeField] private IdleAnimationValue idleAnimation;
-    [SerializeField] private EyeStateValue eyeState;
 
     [Header("Renderers")]
     [SerializeField] private Renderer[] bodyRenderers;
@@ -41,33 +39,12 @@ public class BossAnimations : MonoBehaviour
         }
     }
 
-    public IdleAnimationValue IdleAnimation
-    {
-        get => idleAnimation;
-        set
-        {
-            idleAnimation = value;
-            UpdateIdleAnimation();
-        }
-    }
-
-    public EyeStateValue EyeState
-    {
-        get => eyeState;
-        set
-        {
-            eyeState = value;
-            UpdateVisual();
-        }
-    }
-
     private void Awake()
     {
         character = GetComponent<Boss>();
         animator = GetComponent<Animator>();
 
         UpdateVisual();
-        UpdateIdleAnimation();
     }
 
     private void Update()
@@ -86,7 +63,6 @@ public class BossAnimations : MonoBehaviour
         var visualIndex = (int)playerIndex;
         var bodyTexture = bodyTextures[visualIndex];
         var eyeColor = eyeColors[visualIndex];
-        var eyeTextureOffset = eyesTextureOffset[(int)eyeState];
 
         // Update body renderers
         for (var i = 0; i < bodyRenderers.Length; i++)
@@ -96,12 +72,6 @@ public class BossAnimations : MonoBehaviour
 
         // Update eyes renderer.
         eyesRenderer.material.SetColor(EmissionColor, eyeColor);
-        eyesRenderer.material.mainTextureOffset = eyeTextureOffset;
-    }
-
-    private void UpdateIdleAnimation()
-    {
-        animator.SetTrigger(idleAnimation.ToString());
     }
 
 #if UNITY_EDITOR
@@ -119,7 +89,6 @@ public class BossAnimations : MonoBehaviour
         if (animator is null) return;
 
         UpdateVisual();
-        UpdateIdleAnimation();
     }
 #endif
 
@@ -129,21 +98,5 @@ public class BossAnimations : MonoBehaviour
         Player2 = 1,
         Player3 = 2,
         Player4 = 3,
-    }
-
-    public enum IdleAnimationValue
-    {
-        Normal = 0,
-        Happy = 1,
-        Angry = 2,
-        Scared = 3
-    }
-
-    public enum EyeStateValue
-    {
-        Normal = 0,
-        Happy = 1,
-        Angry = 2,
-        Scared = 3
     }
 }
