@@ -29,6 +29,13 @@ public class Boss : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         missileObjectPool = GetComponent<ObjectPool>();
         rb.maxLinearVelocity = moveSpeed;
+        this.enabled = false;
+    }
+
+    public void SpawnBoss()
+    {
+        this.enabled = true;
+        OnEnable();
     }
 
     private void OnEnable()
@@ -82,12 +89,12 @@ public class Boss : MonoBehaviour
     {
         if (other.gameObject.GetComponent<Bullet>() is not null)
         {
+            currentHealthPoints -= Bullet.damage;
             if (currentHealthPoints <= 0)
             {
                 enabled = false;
                 EventChannels.OnBossDeath();
             }
-            //currentHealthPoints -= bullet.damage;
         }
         return;
     }
